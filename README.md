@@ -54,7 +54,7 @@ curl https://api.example.com/murotal/abdulbasit/001
 ## 📱 Contact & Support
 
 - **WhatsApp Channel**: [Join Channel]([https://whatsapp.com/channel/y](https://www.whatsapp.com/channel/0029VasizxI47XeE2iiave0u))
-- **Telegram**: [@YourTelegram](https://t.me/cloudkudev)
+- **Telegram**: [@cloudkudev](https://t.me/cloudkudev)
 - **WhatsApp Chat**: [Direct Chat](https://wa.me/6287831816747)
 
 ## 🤝 Contributing
