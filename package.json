@@ -1,0 +1,45 @@
+{
+  "name": "cloudku-religion",
+  "version": "1.0.0",
+  "description": "Cloudku Religion Rest Api - Comprehensive Islamic API with Quran, Hadith, Prayer times and more",
+  "type": "module",
+  "main": "main.js",
+  "homepage": "https://cloudku.us.kg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudkuimages/cloudku-murotal-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cloudkuimages/cloudku-murotal-api/issues"
+  },
+  "keywords": [
+    "islamic-api",
+    "quran-api",
+    "hadith-api",
+    "prayer-times",
+    "murotal",
+    "religion",
+    "islam",
+    "rest-api"
+  ],
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": {
+    "name": "AlfiDev",
+    "url": "https://cloudku.us.kg"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "chalk": "^5.4.1",
+    "cloudku-uploader": "^2.2.5",
+    "express": "^5.1.0",
+    "naruyaizumi": "latest"
+  },
+  "devDependencies": {}
+  ]
+}
