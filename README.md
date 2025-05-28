@@ -3,7 +3,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/cloudkuimages/cloudku-murotal-api?style=social)](https://github.com/cloudkuimages/murotal-api/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/cloudkuimages/cloudku-murotal-api?style=social)](https://github.com/cloudkuimages/murotal-api/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/cloudkuimages/murotal-api)](https://github.com/cloudkuimages/cloudku-murotal-api/issues)
-[![GitHub license](https://img.shields.io/github/license/cloudkuimages/murotal-api)](https://github.com/cloudkuimages/cloudku-murotal-api/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/cloudkuimages/cloudku-murotal-api)](https://github.com/cloudkuimages/cloudku-murotal-api/blob/main/LICENSE)
 [![npm version](https://img.shields.io/npm/v/naruyaizumi)](https://www.npmjs.com/package/naruyaizumi)
 
 Powerful and efficient API for accessing Quranic recitations (Murotal) with comprehensive features and easy integration.
