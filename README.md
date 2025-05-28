@@ -81,9 +81,9 @@ const data = await api.getRecitation({
 
 ## 📱 Contact & Support
 
-- **WhatsApp Channel**: [Join Channel](https://whatsapp.com/channel/your-channel)
-- **Telegram**: [@YourTelegram](https://t.me/your-telegram)
-- **WhatsApp Chat**: [Direct Chat](https://wa.me/your-number)
+- **WhatsApp Channel**: [Join Channel](https://whatsapp.com/channel/0029VasizxI47XeE2iiave0u)
+- **Telegram**: [@cloudkudev](https://t.me/cloudkudev)
+- **WhatsApp Chat**: [Direct Chat](https://wa.me/6287831816747)
 
 ## 🤝 Contributing
 
@@ -109,4 +109,4 @@ Built with ❤️ for the Muslim community
 
 ---
 
-**Documentation**: [cloudku.us.kg](https://cloudku.us.kg) | **Support**: [WhatsApp](https://wa.me/your-number)
+**Documentation**: [cloudku.us.kg](https://cloudku.us.kg) | **Support**: [WhatsApp](https://wa.me/6287831816747)
