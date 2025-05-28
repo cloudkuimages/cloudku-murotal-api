@@ -1,5 +1,12 @@
 # Murotal API
 
+[![GitHub stars](https://img.shields.io/github/stars/cloudkuimages/murotal-api?style=social)](https://github.com/cloudkuimages/murotal-api/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/cloudkuimages/murotal-api?style=social)](https://github.com/cloudkuimages/murotal-api/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/cloudkuimages/murotal-api)](https://github.com/cloudkuimages/murotal-api/issues)
+[![GitHub license](https://img.shields.io/github/license/cloudkuimages/murotal-api)](https://github.com/cloudkuimages/murotal-api/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/naruyaizumi)](https://www.npmjs.com/package/naruyaizumi)
+[![npm downloads](https://img.shields.io/npm/dm/naruyaizumi)](https://www.npmjs.com/package/naruyaizumi)
+
 Powerful and efficient API for accessing Quranic recitations (Murotal) with comprehensive features and easy integration.
 
 ## 🚀 Features
@@ -18,15 +25,37 @@ Complete API documentation available at: **[cloudku.us.kg](https://cloudku.us.kg
 
 ## 🛠️ Installation & Usage
 
-### Basic Endpoint
+### NPM Package
+```bash
+npm install naruyaizumi
+```
+
+### Basic Usage
+```javascript
+const { MurotalAPI } = require('naruyaizumi');
+
+const api = new MurotalAPI();
+const recitation = await api.getMurotal('abdulbasit', 1);
+```
+
+### API Endpoints
 ```
 GET /api/murotal/{reciter}/{surah}
 GET /api/murotal/{reciter}/{surah}/{verse}
 ```
 
-### Example Request
-```bash
-curl https://api.example.com/murotal/abdulbasit/001
+### NPM Implementation
+```javascript
+const { MurotalAPI } = require('naruyaizumi');
+
+const api = new MurotalAPI({
+  baseURL: 'https://api.cloudku.us.kg'
+});
+
+const data = await api.getRecitation({
+  reciter: 'abdulbasit',
+  surah: 1
+});
 ```
 
 ### Response Format
@@ -53,9 +82,9 @@ curl https://api.example.com/murotal/abdulbasit/001
 
 ## 📱 Contact & Support
 
-- **WhatsApp Channel**: [Join Channel]([https://whatsapp.com/channel/y](https://www.whatsapp.com/channel/0029VasizxI47XeE2iiave0u))
-- **Telegram**: [@cloudkudev](https://t.me/cloudkudev)
-- **WhatsApp Chat**: [Direct Chat](https://wa.me/6287831816747)
+- **WhatsApp Channel**: [Join Channel](https://whatsapp.com/channel/your-channel)
+- **Telegram**: [@YourTelegram](https://t.me/your-telegram)
+- **WhatsApp Chat**: [Direct Chat](https://wa.me/your-number)
 
 ## 🤝 Contributing
 
@@ -81,4 +110,4 @@ Built with ❤️ for the Muslim community
 
 ---
 
-**Documentation**: [cloudku.us.kg](https://cloudku.us.kg) | **Support**: [WhatsApp](https://wa.me/6287831816747)
+**Documentation**: [cloudku.us.kg](https://cloudku.us.kg) | **Support**: [WhatsApp](https://wa.me/your-number)
