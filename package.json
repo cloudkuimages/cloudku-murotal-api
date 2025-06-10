@@ -38,6 +38,6 @@
     "chalk": "^5.4.1",
     "cloudku-uploader": "^2.2.5",
     "express": "^5.1.0",
-    "naruyaizumi": "latest"
+    "cloudku-murotal": "latest"
   }
 }
