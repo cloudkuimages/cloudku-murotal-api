@@ -4,7 +4,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/cloudkuimages/cloudku-murotal-api?style=social)](https://github.com/cloudkuimages/murotal-api/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/cloudkuimages/murotal-api)](https://github.com/cloudkuimages/cloudku-murotal-api/issues)
 [![GitHub license](https://img.shields.io/github/license/cloudkuimages/cloudku-murotal-api)](https://github.com/cloudkuimages/cloudku-murotal-api/blob/main/LICENSE)
-[![npm version](https://img.shields.io/npm/v/naruyaizumi)](https://www.npmjs.com/package/naruyaizumi)
+[![npm version](https://img.shields.io/npm/v/cloudku-murotal)](https://www.npmjs.com/package/cloudku-murotal)
 
 Powerful and efficient API for accessing Quranic recitations (Murotal) with comprehensive features and easy integration.
 
@@ -26,12 +26,12 @@ Complete API documentation available at: **[cloudku.us.kg](https://cloudku.us.kg
 
 ### NPM Package
 ```bash
-npm install naruyaizumi
+npm install cloudku-murotal
 ```
 
 ### Basic Usage
 ```javascript
-const { MurotalAPI } = require('naruyaizumi');
+const { MurotalAPI } = require('cloudku-murotal');
 
 const api = new MurotalAPI();
 const recitation = await api.getMurotal('abdulbasit', 1);
@@ -45,10 +45,10 @@ GET /api/murotal/{reciter}/{surah}/{verse}
 
 ### NPM Implementation
 ```javascript
-const { MurotalAPI } = require('naruyaizumi');
+const { MurotalAPI } = require('cloudku-murotal');
 
 const api = new MurotalAPI({
-  baseURL: 'https://api.cloudku.us.kg'
+  baseURL: 'https://cloudku.us.kg'
 });
 
 const data = await api.getRecitation({
