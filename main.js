@@ -23,7 +23,7 @@ import {
   getRandomHusna,
   getAyahByTheme,
   getAllThemes
-} from 'naruyaizumi';
+} from 'cloudku-murotal';
 
 const app = express();
 const PORT = process.env.PORT || 5500;
