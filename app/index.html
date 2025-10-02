@@ -1,1 +1,618 @@
-<------- Add Your Html Here -------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempMail Dashboard - Cloudku API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .email-control {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .email-selector {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        select {
+            background: white;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .email-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .email-info.show {
+            display: block;
+        }
+
+        .email-info p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .email-info strong {
+            color: #667eea;
+        }
+
+        .inbox-section {
+            margin-top: 20px;
+        }
+
+        .inbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .inbox-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .refresh-btn {
+            width: auto;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .inbox-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .email-item {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .email-item:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        .email-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .email-from {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .email-date {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .email-subject {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: auto;
+        }
+
+        .close-btn:hover {
+            color: #333;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .email-meta {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .email-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .email-content {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .email-content iframe {
+            width: 100%;
+            min-height: 400px;
+            border: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .email-control {
+                flex-direction: column;
+            }
+
+            .email-selector {
+                min-width: 100%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .modal-content {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 TempMail Dashboard</h1>
+            <p>Temporary Email Service - Powered by Cloudku API</p>
+        </div>
+
+        <div class="card">
+            <div class="email-control">
+                <div class="email-selector">
+                    <select id="emailSelector">
+                        <option value="">Select an email or generate new</option>
+                    </select>
+                </div>
+                <button id="generateBtn">Generate New Email</button>
+            </div>
+
+            <div id="emailInfo" class="email-info">
+                <p><strong>Email:</strong> <span id="currentEmail"></span></p>
+                <p><strong>Password:</strong> <span id="currentPassword"></span></p>
+                <p><strong>Created:</strong> <span id="currentCreated"></span></p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="inbox-header">
+                <h2>Inbox <span id="emailCount" class="badge">0</span></h2>
+                <button id="refreshBtn" class="refresh-btn">🔄 Refresh</button>
+            </div>
+            <div id="inboxList" class="inbox-list">
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <p>No emails yet. Select an email address to view inbox.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Email Content</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading email...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let emails = [];
+        let currentEmail = null;
+        let refreshInterval = null;
+
+        async function loadEmails() {
+            try {
+                const response = await fetch('/api/tempmail/list');
+                const data = await response.json();
+                if (data.status === 'success') {
+                    emails = data.result;
+                    updateEmailSelector();
+                }
+            } catch (error) {
+                console.error('Failed to load emails:', error);
+            }
+        }
+
+        function updateEmailSelector() {
+            const selector = document.getElementById('emailSelector');
+            selector.innerHTML = '<option value="">Select an email or generate new</option>';
+            
+            emails.forEach(email => {
+                const option = document.createElement('option');
+                option.value = email.email;
+                option.textContent = email.email;
+                selector.appendChild(option);
+            });
+
+            if (currentEmail) {
+                selector.value = currentEmail.email;
+            }
+        }
+
+        async function generateEmail() {
+            const btn = document.getElementById('generateBtn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            try {
+                const response = await fetch('/api/tempmail/generate', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    await loadEmails();
+                    selectEmail(data.result);
+                }
+            } catch (error) {
+                console.error('Failed to generate email:', error);
+                alert('Failed to generate email. Please try again.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Generate New Email';
+            }
+        }
+
+        function selectEmail(email) {
+            currentEmail = email;
+            document.getElementById('emailSelector').value = email.email;
+            
+            document.getElementById('currentEmail').textContent = email.email;
+            document.getElementById('currentPassword').textContent = email.password;
+            document.getElementById('currentCreated').textContent = new Date(email.createdAt).toLocaleString();
+            document.getElementById('emailInfo').classList.add('show');
+            
+            loadInbox();
+            startAutoRefresh();
+        }
+
+        async function loadInbox() {
+            if (!currentEmail) return;
+
+            const inboxList = document.getElementById('inboxList');
+            inboxList.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading inbox...</p></div>';
+
+            try {
+                const response = await fetch(`/api/tempmail/inbox/${currentEmail.email}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayInbox(data.result);
+                }
+            } catch (error) {
+                console.error('Failed to load inbox:', error);
+                inboxList.innerHTML = '<div class="empty-state"><p>Failed to load inbox</p></div>';
+            }
+        }
+
+        function displayInbox(messages) {
+            const inboxList = document.getElementById('inboxList');
+            const emailCount = document.getElementById('emailCount');
+            
+            emailCount.textContent = messages.length;
+
+            if (messages.length === 0) {
+                inboxList.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <p>No emails in inbox yet</p>
+                    </div>
+                `;
+                return;
+            }
+
+            inboxList.innerHTML = messages.map(msg => `
+                <div class="email-item" onclick="viewEmail('${msg.id}')">
+                    <div class="email-item-header">
+                        <span class="email-from">${msg.from}</span>
+                        <span class="email-date">${msg.date}</span>
+                    </div>
+                    <div class="email-subject">${msg.subject || '(No subject)'}</div>
+                </div>
+            `).join('');
+        }
+
+        async function viewEmail(messageId) {
+            const modal = document.getElementById('emailModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modal.classList.add('show');
+            modalBody.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading email...</p></div>';
+
+            try {
+                const response = await fetch(`/api/tempmail/message/${currentEmail.email}/${messageId}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayEmailContent(data.result);
+                }
+            } catch (error) {
+                console.error('Failed to load email:', error);
+                modalBody.innerHTML = '<div class="loading"><p>Failed to load email</p></div>';
+            }
+        }
+
+        function displayEmailContent(message) {
+            const modalBody = document.getElementById('modalBody');
+            
+            let contentHtml = '';
+            
+            if (message.htmlBody) {
+                contentHtml = `
+                    <div class="email-meta">
+                        <p><strong>From:</strong> ${message.from}</p>
+                        <p><strong>Subject:</strong> ${message.subject}</p>
+                        <p><strong>Date:</strong> ${message.date}</p>
+                    </div>
+                    <div class="email-content">
+                        <iframe srcdoc="${message.htmlBody.replace(/"/g, '&quot;')}"></iframe>
+                    </div>
+                `;
+            } else {
+                contentHtml = `
+                    <div class="email-meta">
+                        <p><strong>From:</strong> ${message.from}</p>
+                        <p><strong>Subject:</strong> ${message.subject}</p>
+                        <p><strong>Date:</strong> ${message.date}</p>
+                    </div>
+                    <div class="email-content">
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">${message.textBody || message.body}</pre>
+                    </div>
+                `;
+            }
+            
+            modalBody.innerHTML = contentHtml;
+        }
+
+        function closeModal() {
+            document.getElementById('emailModal').classList.remove('show');
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+            refreshInterval = setInterval(loadInbox, 10000);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        }
+
+        document.getElementById('generateBtn').addEventListener('click', generateEmail);
+        document.getElementById('refreshBtn').addEventListener('click', loadInbox);
+        document.getElementById('emailSelector').addEventListener('change', (e) => {
+            if (e.target.value) {
+                const email = emails.find(em => em.email === e.target.value);
+                if (email) {
+                    selectEmail(email);
+                }
+            } else {
+                currentEmail = null;
+                document.getElementById('emailInfo').classList.remove('show');
+                document.getElementById('inboxList').innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <p>No emails yet. Select an email address to view inbox.</p>
+                    </div>
+                `;
+                stopAutoRefresh();
+            }
+        });
+
+        document.getElementById('emailModal').addEventListener('click', (e) => {
+            if (e.target.id === 'emailModal') {
+                closeModal();
+            }
+        });
+
+        loadEmails();
+    </script>
+</body>
+</html>
